@@ -14,43 +14,66 @@
 	<name>微信项目</name>
 	<description>周楠微信项目</description>
 
+	<!-- 项目的属性配置 -->
 	<properties>
-		<java.version>11</java.version>
+		<java.version>9</java.version>
+		<!-- 源代码的字符编码，由于大家的开发环境都是Windows，默认GBK，而服务器默认UTF-8 -->
+		<!-- 所以必须设置字符编码，否则乱码！ -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 生成的报告文件的字符编码 -->
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-
+	
 	<dependencies>
+	
+		<!-- 用于访问关系数据库，不需要写SQL语句、不要自己创建数据库表、能够自动根据接口的方法名称生成查询语句 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
+		<!-- 用于访问Redis数据库 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
+		
+		<!-- 自动配置Spring MVC -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		
+		<!-- 开发者工具，用于实现热部署，在修改文件以后马上能够生效 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<!-- 数据库驱动 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- 单元测试支持 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+		
+			<!-- Spring Boot提供的打包插件，能够在把项目打包的时候，自动把依赖的jar文件一并打包 -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
