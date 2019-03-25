@@ -16,7 +16,7 @@
 
 	<!-- 项目的属性配置 -->
 	<properties>
-		<java.version>9</java.version>
+		<java.version>11</java.version>
 		<!-- 源代码的字符编码，由于大家的开发环境都是Windows，默认GBK，而服务器默认UTF-8 -->
 		<!-- 所以必须设置字符编码，否则乱码！ -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
