@@ -36,6 +36,7 @@ public class MessageReceiverController {
 	public String onMessage(@RequestParam("signature") String signature, @RequestParam("timestamp") String timestamp,
 			@RequestParam("nonce") String nonce, @RequestBody String xml)
 			throws JsonParseException, JsonMappingException, IOException {
+                System.out.println(xml);
 		// 收到消息并打印
 		LOG.trace("收到的消息原文：\n{}\n------------------------------", xml);
 		// 转换消息1.获取消息的类型

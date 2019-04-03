@@ -23,6 +23,7 @@ public class MessageConvertHelper {
 		typeMap.put("image", ImageInMessage.class);
 		typeMap.put("vioce", VoiceInMessage.class);
 		typeMap.put("video", VideoInMessage.class);
+		typeMap.put("shortvideo", VideoInMessage.class);
 	}
 	
 	public static Class<? extends InMessage> getClass(String xml) {
