@@ -12,9 +12,11 @@ import org.fisher.weixin.controller.inmessage.InMessage;
 public class VideoInMessage extends InMessage{
 
 	private static final long serialVersionUID = 1L;
+	@XmlElement(name="Video")
 	private String video;
 	@XmlElement(name="MediaId")
 	private String mediaId;
+	@XmlElement(name="ThumbmediaId")
 	private String thumbmediaId;
 	public String getVideo() {
 		return video;
