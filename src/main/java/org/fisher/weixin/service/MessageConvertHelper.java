@@ -31,10 +31,6 @@ public class MessageConvertHelper {
 		// 获取Java类
 		Class<? extends InMessage> c = typeMap.get(type);
 		
-		if(c==null) {
-			return null;
-		}
-		
 		return c;
 	}
 
