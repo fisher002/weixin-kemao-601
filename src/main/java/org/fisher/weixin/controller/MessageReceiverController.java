@@ -1,5 +1,7 @@
 package org.fisher.weixin.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.IOException;
 
@@ -27,6 +30,11 @@ public class MessageReceiverController {
 	// 日志记录器
 	private static final Logger LOG = LoggerFactory.getLogger(MessageReceiverController.class);
 	
+	@Autowired
+	private XmlMapper xmlMapper;
+	@Autowired
+	private RedisTemplate<String, ? extends InMessage> inMessageTemplate;
+	
 	@GetMapping
 	public String echo(
 			@RequestParam("signature") String signature,
@@ -39,13 +47,13 @@ public class MessageReceiverController {
 	
 	@PostMapping
 	// @RequestBody注解表示把请求内容获取出来，并且转换为String传入给xml参数。
-	public String onMessage(//
+	public String onMessage(
 			@RequestParam("signature")
-			String signature, //
+			String signature, 
 			@RequestParam("timestamp") 
-			String timestamp, //
+			String timestamp, 
 			@RequestParam("nonce") 
-			String nonce, //
+			String nonce, 
 			@RequestBody 
 			String xml) throws JsonParseException, JsonMappingException, IOException {
 		// 收到消息
