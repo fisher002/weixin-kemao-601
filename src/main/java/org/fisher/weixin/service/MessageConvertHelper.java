@@ -9,6 +9,7 @@ import javax.xml.bind.JAXB;
 import org.fisher.weixin.controller.inmessage.InMessage;
 import org.fisher.weixin.controller.inmessage.image.ImageInMessage;
 import org.fisher.weixin.controller.inmessage.text.TextInMessage;
+import org.fisher.weixin.controller.inmessage.video.VideoInMessage;
 import org.fisher.weixin.controller.inmessage.voice.VoiceInMessage;
 
 public class MessageConvertHelper {
@@ -21,6 +22,7 @@ public class MessageConvertHelper {
 		typeMap.put("text", TextInMessage.class);
 		typeMap.put("image", ImageInMessage.class);
 		typeMap.put("vioce", VoiceInMessage.class);
+		typeMap.put("video", VideoInMessage.class);
 	}
 	
 	public static Class<? extends InMessage> getClass(String xml) {

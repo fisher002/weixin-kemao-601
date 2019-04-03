@@ -15,6 +15,14 @@ public class VoiceInMessage extends InMessage {
 	
 	@XmlElement(name="Voice")
 	private String voice;
+	@XmlElement(name="Format")
+	private String format;
+	public String getFormat() {
+		return format;
+	}
+	public void setFormat(String format) {
+		this.format = format;
+	}
 	@XmlElement(name="MediaId")
 	private String mediaId;
 	
@@ -32,9 +40,9 @@ public class VoiceInMessage extends InMessage {
 	}
 	@Override
 	public String toString() {
-		return "VoiceInMessage [voice=" + voice + ", mediaId=" + mediaId + ", getToUserName()=" + getToUserName()
-				+ ", getFromUserName()=" + getFromUserName() + ", getCreateTime()=" + getCreateTime()
+		return "VoiceInMessage [voice=" + voice + ", format=" + format + ", mediaId=" + mediaId + ", getToUserName()="
+				+ getToUserName() + ", getFromUserName()=" + getFromUserName() + ", getCreateTime()=" + getCreateTime()
 				+ ", getMsgType()=" + getMsgType() + ", getMsgId()=" + getMsgId() + "]";
 	}
-
+	
 }
