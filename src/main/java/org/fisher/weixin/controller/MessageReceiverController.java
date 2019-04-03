@@ -1,7 +1,5 @@
 package org.fisher.weixin.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.IOException;
 
@@ -29,11 +26,6 @@ public class MessageReceiverController {
 	
 	// 日志记录器
 	private static final Logger LOG = LoggerFactory.getLogger(MessageReceiverController.class);
-	
-	@Autowired
-	private XmlMapper xmlMapper;
-	@Autowired
-	private RedisTemplate<String, ? extends InMessage> inMessageTemplate;
 	
 	@GetMapping
 	public String echo(
