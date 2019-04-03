@@ -43,7 +43,7 @@ public class MessageReceiverController {
 
 		LOG.debug("转换后的消息\n{}\n", inMessage);
 
-		return "获取成功";
+		return "success";
 	}
 
 }
