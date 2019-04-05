@@ -1,5 +1,7 @@
 package org.fisher.weixin.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import org.fisher.weixin.controller.inmessage.InMessage;
 import org.fisher.weixin.service.MessageConvertHelper;
@@ -25,6 +29,9 @@ public class MessageReceiverController {
 
 	// 日志记录器
 	private static final Logger LOG = LoggerFactory.getLogger(MessageReceiverController.class);
+	
+	@Autowired
+	private RedisTemplate<String, ? extends InMessage> inMessageTemplate;
 
 	@GetMapping
 	public String echo(@RequestParam("signature") String signature, @RequestParam("timestamp") String timestamp,
@@ -43,6 +50,17 @@ public class MessageReceiverController {
 		InMessage inMessage = MessageConvertHelper.convert(xml);
 
 		LOG.debug("转换后的消息\n{}\n", inMessage);
+		
+		//序列化消息
+		//1、完成对象的序列化
+//		ByteArrayOutputStream type = new ByteArrayOutputStream();
+//		ObjectOutputStream object=new ObjectOutputStream(type);
+//		object.writeObject(inMessage);
+		//2、把序列化后的对象放入队列
+	    String channel = "zjy_" + inMessage.getMsgType();
+	    // 直接把对象发送出去
+	 	inMessageTemplate.convertAndSend(channel, inMessage);
+	    
 
 		return "success";
 	}
