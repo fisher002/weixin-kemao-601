@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 @SpringBootApplication
 public class WeixinApplication {
@@ -17,6 +18,8 @@ public class WeixinApplication {
 
 		RedisTemplate<String, ? extends InMessage> template = new RedisTemplate<>();
 		template.setConnectionFactory(connectionFactory);
+		// 使用序列化程序完成对象的序列化和反序列化，可以自定义
+		template.setValueSerializer(new Jackson2JsonRedisSerializer<>(InMessage.class));
 		return template;
 	}
 
