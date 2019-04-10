@@ -45,6 +45,11 @@
 			<version>2.3.2</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- 使用Jackson来转换XML和Java对象，企业使用较多，因为它跟Spring生态结合非常紧密 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
 	
 		<!-- 用于访问关系数据库，不需要写SQL语句、不要自己创建数据库表、能够自动根据接口的方法名称生成查询语句 -->
 		<dependency>

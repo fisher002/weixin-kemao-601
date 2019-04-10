@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 import org.fisher.weixin.controller.inmessage.InMessage;
 import org.fisher.weixin.service.MessageConvertHelper;
@@ -27,6 +26,9 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("/zjy/message/receiver")
 public class MessageReceiverController {
 
+	// 这种是属性注入，相当于是XML文件中的<property>元素
+	@Autowired
+	private XmlMapper xmlMapper;
 	// 日志记录器
 	private static final Logger LOG = LoggerFactory.getLogger(MessageReceiverController.class);
 	
@@ -51,18 +53,21 @@ public class MessageReceiverController {
 
 		LOG.debug("转换后的消息\n{}\n", inMessage);
 		
+		 String channel = "zjy_" + inMessage.getMsgType();
 		//序列化消息
 		//1、完成对象的序列化
-//		ByteArrayOutputStream type = new ByteArrayOutputStream();
-//		ObjectOutputStream object=new ObjectOutputStream(type);
-//		object.writeObject(inMessage);
 		//2、把序列化后的对象放入队列
-	    String channel = "zjy_" + inMessage.getMsgType();
 	    // 直接把对象发送出去
 	 	inMessageTemplate.convertAndSend(channel, inMessage);
 	    
 
 		return "success";
+	}
+	@SuppressWarnings("unused")
+	private InMessage convert(String xml) throws JsonParseException, JsonMappingException, IOException {
+		Class<? extends InMessage> c = MessageConvertHelper.getClass(xml);
+		InMessage msg = xmlMapper.readValue(xml, c);
+		return msg;
 	}
 
 }
