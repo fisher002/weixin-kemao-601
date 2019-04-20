@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.xml.bind.JAXB;
 
 import org.fisher.weixin.controller.inmessage.InMessage;
+import org.fisher.weixin.controller.inmessage.event.EventInMessage;
 import org.fisher.weixin.controller.inmessage.image.ImageInMessage;
 import org.fisher.weixin.controller.inmessage.text.TextInMessage;
 import org.fisher.weixin.controller.inmessage.video.VideoInMessage;
@@ -23,6 +24,7 @@ public class MessageConvertHelper {
 		typeMap.put("image", ImageInMessage.class);
 		typeMap.put("vioce", VoiceInMessage.class);
 		typeMap.put("video", VideoInMessage.class);
+		typeMap.put("event", EventInMessage.class);
 		typeMap.put("shortvideo", VideoInMessage.class);
 	}
 	
