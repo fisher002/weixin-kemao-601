@@ -14,7 +14,6 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 @SpringBootApplication
 public class WeixinApplication {
 	
-	// @Bean注解相当于在XML文件中写<bean>元素
 		@Bean
 		public XmlMapper xmlMapper() {
 			XmlMapper mapper = new XmlMapper();
